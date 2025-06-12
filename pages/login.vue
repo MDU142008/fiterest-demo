@@ -41,6 +41,9 @@
 </template>
 
 <script setup>
+definePageMeta({
+  layout: 'clean'
+})
 import { useRouter } from 'vue-router'
 import { useUserPlan } from '~/composables/useUserPlan'
 
