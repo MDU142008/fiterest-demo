@@ -1,17 +1,17 @@
 <template>
   <div>
-    <SideMenu v-if="showMenu" class="hidden md:block" />
-    <BottomMenu v-if="showMenu" class="md:hidden" />
+    <!-- Renderiza menus só se NÃO estiver na rota /login -->
+    <SideMenu v-if="!isLoginPage" class="hidden md:flex" />
+    <BottomMenu v-if="!isLoginPage" class="md:hidden" />
     <NuxtPage />
   </div>
 </template>
 
 <script setup>
-import SideMenu from '~/components/SideMenu.vue'
-import BottomMenu from '~/components/BottomMenu.vue'
+import SideMenu from '@/components/SideMenu.vue'
+import BottomMenu from '@/components/BottomMenu.vue'
 import { useRoute } from 'vue-router'
 
 const route = useRoute()
-// Esconde menus em /login
-const showMenu = computed(() => route.path !== '/login')
+const isLoginPage = computed(() => route.path === '/login')
 </script>
