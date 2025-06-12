@@ -22,14 +22,14 @@
       </h2>
       <div class="flex flex-col gap-4">
         <button
-          @click="navigate('training')"
+          @click="enterAsTraining"
           class="w-full flex items-center justify-center gap-2 px-5 py-3 rounded-xl border border-neutral-700 bg-neutral-900 text-white font-semibold text-lg hover:border-[#ef4444] hover:bg-[#18181b] hover:shadow-[0_0_24px_#ef444460] transition-all"
         >
           <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 stroke-[#ef4444]" fill="none" viewBox="0 0 24 24"><path stroke="currentColor" stroke-width="2" d="M5 12h14M12 5v14"/></svg>
           Plano de Treinamento
         </button>
         <button
-          @click="navigate('trainer')"
+          @click="enterAsTrainer"
           class="w-full flex items-center justify-center gap-2 px-5 py-3 rounded-xl border border-neutral-700 bg-neutral-900 text-white font-semibold text-lg hover:border-[#ef4444] hover:bg-[#18181b] hover:shadow-[0_0_24px_#ef444460] transition-all"
         >
           <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 stroke-[#ef4444]" fill="none" viewBox="0 0 24 24"><circle cx="12" cy="8" r="4" stroke="currentColor" stroke-width="2"/><path stroke="currentColor" stroke-width="2" d="M4 20c0-4 4-7 8-7s8 3 8 7"/></svg>
@@ -42,13 +42,17 @@
 
 <script setup>
 import { useRouter } from 'vue-router'
-const router = useRouter()
+import { useUserPlan } from '~/composables/useUserPlan'
 
-function navigate(role) {
-  if (role === 'training') {
-    router.push('/training')
-  } else if (role === 'trainer') {
-    router.push('/trainer')
-  }
+const router = useRouter()
+const { setPlan } = useUserPlan()
+
+function enterAsTraining() {
+  setPlan('training')
+  router.push('/home')
+}
+function enterAsTrainer() {
+  setPlan('trainer')
+  router.push('/home')
 }
 </script>
